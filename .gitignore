@@ -35,6 +35,9 @@ target/
 # IntelliJ IDEA
 *.iml
 .idea
+mvnw
+mvnw.cmd
+.mvn/
 
 # Eclipse
 .project
