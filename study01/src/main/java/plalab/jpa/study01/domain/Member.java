@@ -1,8 +1,7 @@
 package plalab.jpa.study01.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -13,6 +12,9 @@ public class Member {
     String city;
     String street;
     String zipcode;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    List<Order> orders;
 
     public Long getId() {
         return id;
