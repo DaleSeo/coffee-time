@@ -5,6 +5,15 @@ spring:
   application:
     name: study-jpa-study01
     version: 1.0.0
+
+  jpa:
+    database: h2
+    show_sql: true
+    format_sql: true
+    use_sql_comments: true
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
   datasource:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:~/testdb
@@ -14,8 +23,5 @@ spring:
 logging:
     level:
       org.springframework: WARN
-      plalab.jpa.study01: DEBUG
-
 server:
   port: ${port:8000}
-
