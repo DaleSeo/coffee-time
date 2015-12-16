@@ -1,14 +1,16 @@
 package plalab.jpa.study01.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Item {
 
     @Id @GeneratedValue
     private Long id;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<OrderItem> orderItems;
 
     private String name;
 

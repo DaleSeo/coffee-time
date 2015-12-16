@@ -2,8 +2,9 @@ package plalab.jpa.study01.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Entity
+@Entity(name = "ORDERS")
 public class Order {
 
     @Id
@@ -12,6 +13,9 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     Member member;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    List<OrderItem> orderItems;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     Date orderDate;
@@ -49,5 +53,13 @@ public class Order {
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
