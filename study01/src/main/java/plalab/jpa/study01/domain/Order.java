@@ -9,6 +9,7 @@ public class Order {
 
     @Id
     @GeneratedValue
+    @Column(name = "ORDER_ID")
     Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -18,9 +19,11 @@ public class Order {
     List<OrderItem> orderItems;
 
     @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name = "ORDERDATE")
     Date orderDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS")
     OrderStatus orderStatus;
 
     public Long getId() {

@@ -15,6 +15,7 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
 
+    @Column(name = "ORDERPRICE")
     private int orderPrice;
 
     private int count;

@@ -7,6 +7,7 @@ import java.util.List;
 public class Member {
 
     @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     Long id;
     String name;
     String city;

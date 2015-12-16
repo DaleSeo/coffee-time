@@ -7,6 +7,7 @@ import java.util.List;
 public class Item {
 
     @Id @GeneratedValue
+    @Column(name = "ITEM_ID")
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
@@ -16,6 +17,7 @@ public class Item {
 
     private int price;
 
+    @Column(name = "STOCKQUANTITY")
     private int stockQuantity;
 
     public Long getId() {
