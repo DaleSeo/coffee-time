@@ -1,5 +1,6 @@
 package plalab.jpa.study01.repository;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import plalab.jpa.study01.Study01Application;
 import plalab.jpa.study01.domain.Member;
 
+import static junit.framework.TestCase.assertNotNull;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Study01Application.class)
 public class MemberRepositoryTest {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Before
+    public void setup() {
+        assertNotNull(memberRepository);
+    }
 
     @Test
     public void save(){
