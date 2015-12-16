@@ -1,0 +1,45 @@
+spring:
+  main:
+    banner_mode: console
+
+  application:
+    name: study-jpa-study01
+    version: 1.0.0
+
+  jpa:
+    database: h2
+    show_sql: true
+    format_sql: true
+    use_sql_comments: true
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:~/testdb
+    username: sa
+    password:
+
+logging:
+    level:
+      org.springframework: WARN
+server:
+  port: ${port:8000}
+
+---
+
+spring:
+  profiles: prod
+
+  jpa:
+    database: h2
+    show_sql: false
+    format_sql: true
+    use_sql_comments: true
+    hibernate:
+      ddl-auto: validate
+      dialect: org.hibernate.dialect.H2Dialect
+
+logging:
+  level:
+    org.springframework: INFO
