@@ -3,7 +3,7 @@ spring:
     banner_mode: console
 
   application:
-    name: study-jpa-study01
+    name: study-jpa-study02
     version: 1.0.0
 
   jpa:
