@@ -3,7 +3,6 @@ package plalab.jpa.study02.domain;
 import javax.persistence.*;
 import java.util.List;
 
-import static javax.persistence.FetchType.*;
 
 @Entity
 public class Member {
@@ -16,7 +15,7 @@ public class Member {
     private String street;
     private String zipcode;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = member)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<Order> orders;
 
     public Long getId() {
