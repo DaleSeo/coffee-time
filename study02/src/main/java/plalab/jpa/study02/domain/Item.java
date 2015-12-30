@@ -1,41 +1,30 @@
-/*
- * Copyright (c) 2013 SK planet.
- * All right reserved.
- *
- * This software is the confidential and proprietary information of SK planet.
- * You shall not disclose such Confidential Information and
- * shall use it only in accordance with the terms of the license agreement
- * you entered into with SK planet.
- */
 package plalab.jpa.study02.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * DESC
- * </p>
- * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
+ * Updated on : 2015-12-23. Updated by : 양해엽, SK Planet.
  */
-
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DTYPE", length = 1)
-public abstract class Item extends BaseEntity {
+@Table(name="ITEM")
+public class Item {
 
-    @Id
-    @GeneratedValue
+    @Column (name="ITEM_ID") @Id @GeneratedValue
     private Long id;
 
     private String name;
 
-    private Integer price;
+    private int price;
 
-    private Integer stockQuantity;
+    private int stockQuantity;
 
     @ManyToMany
-    private List<Category> categories;
+    @JoinTable(name = "CATEGORY_ITEM",
+            joinColumns = @JoinColumn(name = "ITEM_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
+    private List<Category> categories = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -53,19 +42,19 @@ public abstract class Item extends BaseEntity {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Integer getStockQuantity() {
+    public int getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(Integer stockQuantity) {
+    public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
 
