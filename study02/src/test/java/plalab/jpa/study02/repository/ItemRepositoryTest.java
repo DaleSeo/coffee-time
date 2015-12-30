@@ -45,8 +45,8 @@ public class ItemRepositoryTest {
         Category category2 = new Category();
         category2.setName("카테고리2");
 
-         // categoryRepository.save(category1);
-         // categoryRepository.save(category2);
+         categoryRepository.save(category1);
+         categoryRepository.save(category2);
 
 //        item1.setCategories(Arrays.asList(category1, category2));
         item1.getCategories().add(category1);
