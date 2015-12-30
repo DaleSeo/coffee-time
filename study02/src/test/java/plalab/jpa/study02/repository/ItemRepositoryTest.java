@@ -10,12 +10,14 @@ import plalab.jpa.study02.Study02Application;
 import plalab.jpa.study02.domain.Category;
 import plalab.jpa.study02.domain.Item;
 
-import java.util.Arrays;
+import javax.transaction.Transactional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Study02Application.class)
+@Transactional
 public class ItemRepositoryTest {
 
     @Autowired
@@ -43,10 +45,12 @@ public class ItemRepositoryTest {
         Category category2 = new Category();
         category2.setName("카테고리2");
 
-        categoryRepository.save(category1);
-        categoryRepository.save(category2);
+         // categoryRepository.save(category1);
+         // categoryRepository.save(category2);
 
-        item1.setCategories(Arrays.asList(category1, category2));
+//        item1.setCategories(Arrays.asList(category1, category2));
+        item1.getCategories().add(category1);
+        item1.getCategories().add(category2);
 
         itemRepository.save(item1);
         Item findItem = itemRepository.findOne(1L);

@@ -21,9 +21,9 @@ public class Item {
     private int stockQuantity;
 
     @ManyToMany
-    @JoinTable(name = "CATEGORY",
-            joinColumns = @JoinColumn(name = "CATEGORY_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
+    @JoinTable(name = "CATEGORY_ITEM",
+            joinColumns = @JoinColumn(name = "ITEM_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
     private List<Category> categories = new ArrayList<>();
 
     public Long getId() {
