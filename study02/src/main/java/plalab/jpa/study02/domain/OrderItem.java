@@ -15,5 +15,5 @@ package plalab.jpa.study02.domain;
  * </p>
  * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
  */
-public class Delivery {
+public class OrderItem {
 }

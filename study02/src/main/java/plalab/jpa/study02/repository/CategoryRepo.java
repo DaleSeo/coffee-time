@@ -7,7 +7,10 @@
  * shall use it only in accordance with the terms of the license agreement
  * you entered into with SK planet.
  */
-package plalab.jpa.study02.domain;
+package plalab.jpa.study02.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import plalab.jpa.study02.domain.Category;
 
 /**
  * <p>
@@ -15,5 +18,5 @@ package plalab.jpa.study02.domain;
  * </p>
  * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
  */
-public class Delivery {
+public interface CategoryRepo extends JpaRepository<Category, Long> {
 }
