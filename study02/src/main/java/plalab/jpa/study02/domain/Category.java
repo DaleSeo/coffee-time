@@ -1,27 +1,40 @@
+/*
+ * Copyright (c) 2013 SK planet.
+ * All right reserved.
+ *
+ * This software is the confidential and proprietary information of SK planet.
+ * You shall not disclose such Confidential Information and
+ * shall use it only in accordance with the terms of the license agreement
+ * you entered into with SK planet.
+ */
 package plalab.jpa.study02.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Updated on : 2015-12-23. Updated by : 양해엽, SK Planet.
+ * <p>
+ * DESC
+ * </p>
+ * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
  */
 @Entity
-@Table(name = "CATEGORY")
 public class Category {
+
     @Id
     @GeneratedValue
-    @Column(name = "CATEGORY_ID")
     private Long id;
+
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Item> items = new ArrayList<>();
+    @ManyToMany()
+    private List<Item> items;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category parent;
 
-//    private List<Category> child = new ArrayList<>();
-
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child;
 
     public Long getId() {
         return id;
@@ -47,11 +60,19 @@ public class Category {
         this.items = items;
     }
 
-//    public List<Category> getChild() {
-//        return child;
-//    }
-//
-//    public void setChild(List<Category> child) {
-//        this.child = child;
-//    }
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
+
+    public List<Category> getChild() {
+        return child;
+    }
+
+    public void setChild(List<Category> child) {
+        this.child = child;
+    }
 }

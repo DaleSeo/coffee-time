@@ -1,68 +1,19 @@
+/*
+ * Copyright (c) 2013 SK planet.
+ * All right reserved.
+ *
+ * This software is the confidential and proprietary information of SK planet.
+ * You shall not disclose such Confidential Information and
+ * shall use it only in accordance with the terms of the license agreement
+ * you entered into with SK planet.
+ */
 package plalab.jpa.study02.domain;
 
-import javax.persistence.*;
-import java.util.List;
-
-
-@Entity
+/**
+ * <p>
+ * DESC
+ * </p>
+ * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
+ */
 public class Member {
-    @Id
-    @GeneratedValue
-    @Column(name="MEMBER_ID")
-    private Long id;
-    private String name;
-    private String city;
-    private String street;
-    private String zipcode;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    private List<Order> orders;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 }
