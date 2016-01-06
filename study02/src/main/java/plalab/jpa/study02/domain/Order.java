@@ -2,6 +2,7 @@ package plalab.jpa.study02.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "ORDERS")
 public class Order {
@@ -22,6 +23,9 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<OrderItem> orderItems;
 
     public Long getId() {
         return id;
@@ -61,5 +65,13 @@ public class Order {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
