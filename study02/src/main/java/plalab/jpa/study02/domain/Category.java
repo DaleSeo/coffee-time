@@ -1,6 +1,8 @@
 package plalab.jpa.study02.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Updated on : 2015-12-23. Updated by : 양해엽, SK Planet.
@@ -14,14 +16,8 @@ public class Category {
     private Long id;
     private String name;
 
-//    @ManyToMany(mappedBy = "categories")
-//    @ManyToMany
-//    @JoinTable(name="CATEGORY_ITEM",
-//        joinColumns = @JoinColumn(name="CATEGORY_ID"),
-//        inverseJoinColumns = @JoinColumn(name="ITEM_ID")
-//    )
- //   private List<Item> items = new ArrayList<>();
-
+    @ManyToMany(mappedBy = "categories")
+    private List<Item> items = new ArrayList<>();
 
     public Long getId() {
         return id;
