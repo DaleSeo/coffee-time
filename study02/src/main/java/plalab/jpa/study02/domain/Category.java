@@ -16,6 +16,13 @@ public class Category {
     private Long id;
     private String name;
 
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
+
     @ManyToMany(mappedBy = "categories")
     private List<Item> items = new ArrayList<>();
 
@@ -35,19 +42,20 @@ public class Category {
         this.name = name;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
+    public List<Item> getItems() {
+        return items;
+    }
 
-//    public List<Category> getChild() {
-//        return child;
-//    }
-//
-//    public void setChild(List<Category> child) {
-//        this.child = child;
-//    }
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", items=" + items +
+                '}';
+    }
 }
