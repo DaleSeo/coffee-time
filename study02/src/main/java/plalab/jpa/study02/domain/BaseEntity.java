@@ -9,6 +9,9 @@
  */
 package plalab.jpa.study02.domain;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
@@ -21,8 +24,10 @@ import java.util.Date;
 @MappedSuperclass
 public class BaseEntity {
 
+    @CreatedDate
     private Date createdDate;
 
+    @LastModifiedDate
     private Date lastModifiedDate;
 
     public Date getCreatedDate() {
