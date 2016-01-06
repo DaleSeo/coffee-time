@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import plalab.jpa.study02.Study02Application;
 import plalab.jpa.study02.domain.Album;
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Study02Application.class)
 @Transactional
+@Rollback(false)
 public class CategoryRepositoryTest {
 
     @Autowired
@@ -38,19 +40,20 @@ public class CategoryRepositoryTest {
         Category category1 = new Category();
         category1.setName("카테고리1");
 
-        Category category2 = new Category();
-        category2.setName("카테고리2");
-
         categoryRepository.save(category1);
-        categoryRepository.save(category2);
 
-        Category findCategory = categoryRepository.findOne(1L);
+        Category findCategory = categoryRepository.findOne(category1.getId());
         assertEquals(findCategory.getName(), category1.getName());
-       // assertEquals(findCategory.getItems().size(), 2);
+        assertEquals(findCategory.getItems().size(), 0);
     }
 
     @Test
     public void test2() {
+        Category category1 = new Category();
+        category1.setName("카테고리1");
+
+        categoryRepository.save(category1);
+
         Item item1 = new Album();
         item1.setName("아이템1");
         item1.setPrice(100);
@@ -64,16 +67,12 @@ public class CategoryRepositoryTest {
         itemRepository.save(item1);
         itemRepository.save(item2);
 
-        Category category1 = new Category();
-        category1.setName("카테고리1");
+        category1.getItems().add(item1);
+        category1.getItems().add(item2);
 
-        //category1.setItems(Arrays.asList(item1, item2));
-
-        categoryRepository.saveAndFlush(category1);
-
-        Category findCategory = categoryRepository.findOne(1L);
+        Category findCategory = categoryRepository.findOne(category1.getId());
         assertEquals(findCategory.getName(), category1.getName());
-       // assertEquals(findCategory.getItems().size(), 2);
+        assertEquals(findCategory.getItems().size(), 2);
     }
 
 }

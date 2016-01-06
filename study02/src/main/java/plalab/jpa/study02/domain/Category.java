@@ -35,19 +35,12 @@ public class Category {
         this.name = name;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
+    public List<Item> getItems() {
+        return items;
+    }
 
-//    public List<Category> getChild() {
-//        return child;
-//    }
-//
-//    public void setChild(List<Category> child) {
-//        this.child = child;
-//    }
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
 }
