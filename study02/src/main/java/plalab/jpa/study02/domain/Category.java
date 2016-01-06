@@ -19,6 +19,12 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<Item> items = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child;
+
     public Long getId() {
         return id;
     }
@@ -35,19 +41,27 @@ public class Category {
         this.name = name;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
+    public List<Item> getItems() {
+        return items;
+    }
 
-//    public List<Category> getChild() {
-//        return child;
-//    }
-//
-//    public void setChild(List<Category> child) {
-//        this.child = child;
-//    }
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public List<Category> getChild() {
+        return child;
+    }
+
+    public void setChild(List<Category> child) {
+        this.child = child;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
 }
