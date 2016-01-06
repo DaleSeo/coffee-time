@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import plalab.jpa.study02.Study02Application;
 import plalab.jpa.study02.domain.Category;
 import plalab.jpa.study02.domain.Item;
+import plalab.jpa.study02.domain.Movie;
 
 import javax.transaction.Transactional;
 
@@ -49,12 +50,12 @@ public class CategoryRepositoryTest {
 
     @Test
     public void test2() {
-        Item item1 = new Item();
+        Item item1 = new Movie();
         item1.setName("아이템1");
         item1.setPrice(100);
         item1.setStockQuantity(200);
 
-        Item item2 = new Item();
+        Item item2 = new Movie();
         item2.setName("아이템2");
         item2.setPrice(200);
         item2.setStockQuantity(400);
