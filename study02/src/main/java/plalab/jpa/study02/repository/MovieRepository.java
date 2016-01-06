@@ -10,13 +10,18 @@
 package plalab.jpa.study02.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import plalab.jpa.study02.domain.Album;
+import plalab.jpa.study02.domain.Movie;
+
+import java.util.List;
 
 /**
  * <p>
  * DESC
  * </p>
- * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
+ * Updated on : 2016. 01. 06 Updated by : 정희원, SK 플래닛.
  */
-public interface AlbumRepo extends JpaRepository<Album, Long> {
+public interface MovieRepository extends JpaRepository<Movie, Long> {
+
+    List<Movie> findByName(String name);
+
 }

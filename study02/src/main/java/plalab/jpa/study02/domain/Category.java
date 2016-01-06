@@ -16,15 +16,14 @@ public class Category {
     private Long id;
     private String name;
 
-    public Category() {
-    }
-
-    public Category(String name) {
-        this.name = name;
-    }
-
     @ManyToMany(mappedBy = "categories")
     private List<Item> items = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child;
 
     public Long getId() {
         return id;
@@ -50,12 +49,19 @@ public class Category {
         this.items = items;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", items=" + items +
-                '}';
+    public List<Category> getChild() {
+        return child;
+    }
+
+    public void setChild(List<Category> child) {
+        this.child = child;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
     }
 }
