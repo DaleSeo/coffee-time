@@ -5,8 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import plalab.jpa.study02.Study02Application;
+import plalab.jpa.study02.domain.Album;
 import plalab.jpa.study02.domain.Category;
 import plalab.jpa.study02.domain.Item;
 
@@ -18,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Study02Application.class)
 @Transactional
+@Rollback(false)
 public class ItemRepositoryTest {
 
     @Autowired
@@ -34,7 +37,7 @@ public class ItemRepositoryTest {
 
     @Test
     public void test1() {
-        Item item1 = new Item();
+        Item item1 = new Album();
         item1.setName("아이템1");
         item1.setPrice(100);
         item1.setStockQuantity(200);
