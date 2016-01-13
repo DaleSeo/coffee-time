@@ -68,6 +68,9 @@ public abstract class Item extends BaseEntity{
         this.categories = categories;
     }
 
+    public void discount(int percent) {
+        price = price * (100 - percent) / 100;
+    }
     @Override
     public String toString() {
         return "Item{" +

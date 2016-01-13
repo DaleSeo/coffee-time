@@ -8,7 +8,7 @@ public class MyDateTimeProvider implements DateTimeProvider {
     @Override
     public Calendar getNow() {
         Calendar calendar = Calendar.getInstance();
-        System.out.println(calendar.getTime());
+//        System.out.println(calendar.getTime());
         return calendar;
     }
 }
