@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name="ITEM")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
-public abstract class Item {
+public abstract class Item extends BaseEntity{
 
     @Column (name="ITEM_ID") @Id @GeneratedValue
     private Long id;
@@ -70,6 +70,9 @@ public abstract class Item {
         this.categories = categories;
     }
 
+    public void discount(int percent) {
+        price = price * (100 - percent) / 100;
+    }
     @Override
     public String toString() {
         return "Item{" +

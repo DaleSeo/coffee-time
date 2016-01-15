@@ -100,6 +100,23 @@ public class ItemService {
     }
 
     @Transactional
+    public Movie createMovie(String name, String director, int price) {
+        Movie movie = new Movie();
+        movie.setName(name);
+        movie.setDirector(director);
+        movie.setPrice(price);
+        itemRepository.save(movie);
+        return movie;
+    }
+
+    @Transactional
+    public Item saleItem(Long id) {
+        Item item = itemRepository.findOne(id);
+        item.discount(30);
+        return item;
+    }
+
+    @Transactional
     public List<Item> findByNameLike(String name) {
         return itemRepository.findByNameStartingWith(name);
     }
