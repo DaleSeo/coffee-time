@@ -11,7 +11,9 @@ package plalab.jpa.study02.domain;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
@@ -21,6 +23,7 @@ import java.util.Date;
  * </p>
  * Updated on : 2015. 12. 30 Updated by : 정희원, SK 플래닛.
  */
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class BaseEntity {
 
