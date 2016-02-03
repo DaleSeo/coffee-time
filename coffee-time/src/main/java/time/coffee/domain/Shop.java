@@ -1,10 +1,10 @@
 package time.coffee.domain;
 
-import sun.util.resources.cldr.gv.LocaleNames_gv;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * Created by 1001256 on 16. 1. 28..
@@ -20,6 +20,9 @@ public class Shop {
     private String tel;
 
     private String description;
+
+	@OneToMany(mappedBy = "shop")
+	private List<Menu> menus;
 
     public Long getId() {
         return id;
@@ -53,4 +56,11 @@ public class Shop {
         this.description = description;
     }
 
+	public List<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 }

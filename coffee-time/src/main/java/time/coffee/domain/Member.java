@@ -17,7 +17,12 @@ public class Member {
     @NaturalId // unique index 자동 생성
     private String empNo;
 
-    public Long getId() {
+	public Member(String empNo, String name) {
+		this.empNo = empNo;
+		this.name = name;
+	}
+
+	public Long getId() {
         return id;
     }
 

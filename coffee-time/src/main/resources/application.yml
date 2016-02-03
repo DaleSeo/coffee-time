@@ -15,6 +15,7 @@ spring:
 
 logging:
     level:
+      ROOT: INFO
       org.springframework: WARN
 server:
   port: ${port:8000}
