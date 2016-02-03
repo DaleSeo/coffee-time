@@ -1,7 +1,6 @@
 package time.coffee.domain;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Menu {
@@ -12,10 +11,8 @@ public class Menu {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
     private Shop shop;
-
-    @OneToMany
-    private List<MenuOption> options;
 
     private String description;
 
