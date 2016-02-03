@@ -1,0 +1,6 @@
+spring:
+  main:
+    banner_mode: none
+  application:
+    name: coffee-time
+    version: 1.0.0
