@@ -17,6 +17,14 @@ public class MemberDto {
 		this.empNo = entity.getEmpNo();
 	}
 
+	public Member convertToEntity() {
+		Member mem = new Member();
+		mem.setId(id);
+		mem.setEmpNo(empNo);
+		mem.setName(name);
+		return mem;
+	}
+
 	public Long getId() {
 		return id;
 	}

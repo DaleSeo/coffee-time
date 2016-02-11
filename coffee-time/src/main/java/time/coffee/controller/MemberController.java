@@ -1,5 +1,6 @@
 package time.coffee.controller;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,7 +9,6 @@ import time.coffee.domain.Member;
 import time.coffee.dto.MemberDto;
 import time.coffee.service.CoffeeAdminService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,12 +20,14 @@ public class MemberController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<MemberDto> findAll() {
-		List<Member> entityList = service.findMembers();
-		List<MemberDto> dtoList = new ArrayList<>(entityList.size());
-		entityList.forEach(entity -> {
-			dtoList.add(new MemberDto(entity));
-		});
-		return dtoList;
+		return Lists.transform(service.findMembers(), member -> new MemberDto(member));
 	}
 
+	//TODO: 객체 Mapping을 Controller에서 구현
+	@RequestMapping(method = RequestMethod.POST)
+	public MemberDto save(MemberDto member) {
+		Member newMember = member.convertToEntity();    // FIXME
+		service.addMember(newMember);
+		return new MemberDto(newMember);
+	}
 }
