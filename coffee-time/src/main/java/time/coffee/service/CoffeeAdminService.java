@@ -3,14 +3,8 @@ package time.coffee.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import time.coffee.domain.Member;
-import time.coffee.domain.Menu;
-import time.coffee.domain.Shop;
-import time.coffee.domain.Survey;
-import time.coffee.repository.MemberRepository;
-import time.coffee.repository.MenuRepository;
-import time.coffee.repository.ShopRepository;
-import time.coffee.repository.SurveyRepository;
+import time.coffee.domain.*;
+import time.coffee.repository.*;
 
 import java.util.Date;
 import java.util.List;
@@ -33,6 +27,9 @@ public class CoffeeAdminService {
 
 	@Autowired
 	private SurveyRepository surveyRepository;
+
+	@Autowired
+	private OrderRepository orderRepository;
 
 
 	/**
@@ -82,7 +79,13 @@ public class CoffeeAdminService {
 
 
 	@Transactional
-	public void addMenu(){
+	public Menu addMenu(long shopId, String name, String desc){
+		Shop shop = shopRepository.findOne(shopId);
+		Menu menu = new Menu();
+		menu.setName(name);
+		menu.setDescription(desc);
+		menu.setShop(shop);
+		return menuRepository.save(menu);
 
 	}
 
@@ -91,14 +94,25 @@ public class CoffeeAdminService {
 	 * @return
 	 */
 	public List<Survey> findSurveys() {
-		return null;
+		return surveyRepository.findAll();
 	}
 
 	/**
 	 * 결과를 조회합니다.
 	 * @return
 	 */
-	public Object findResult() {
-		return null;
+	public List<Order> findOrders(Long surveyId) {
+		return orderRepository.findBySurveyId(surveyId);
+
+	}
+
+	/**
+	 * 주문을 등록합니다.
+	 * @param order
+	 * @return
+	 */
+	@Transactional
+	public Order addOrder(Order order){
+		return orderRepository.save(order);
 	}
 }
