@@ -5,6 +5,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class)
+@ContextConfiguration(classes = Application.class, loader = SpringApplicationContextLoader.class)
 @WebAppConfiguration
 public class MemberControllerTest {
 

@@ -15,7 +15,8 @@ spring:
 
 logging:
   level:
-    ROOT: INFO
-    org.springframework: WARN
+    root: WARN
+    org.hibernate.SQL: DEBUG
+
 server:
   port: ${port:8000}
