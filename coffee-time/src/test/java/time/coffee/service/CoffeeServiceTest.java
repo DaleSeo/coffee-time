@@ -79,10 +79,8 @@ public class CoffeeServiceTest {
 		//Given
 		setUpData();
 
-		Member expectedMember = new Member();
-		expectedMember.setId(2L);
+        Member expectedMember = service.findMemberByEmpNo("2");
 		expectedMember.setName("Haeyup");
-		expectedMember.setEmpNo("2");
 
 		//When
 		Member member = service.updateMember(expectedMember);

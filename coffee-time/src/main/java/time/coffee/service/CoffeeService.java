@@ -63,6 +63,10 @@ public class CoffeeService {
 	@Transactional
 	public Member updateMember(Member member) {
 		Member found = memberRepository.findOne(member.getId());
+        if (found == null) {
+            throw new IllegalArgumentException("Unknown member id: " + member.getId());
+        }
+
 		found.setEmpNo(member.getEmpNo());
 		found.setName(member.getName());
 		return found;
