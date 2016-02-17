@@ -74,6 +74,23 @@ public class CoffeeServiceTest {
 
 	}
 
+	@Test
+	public void testUpdateMember() {
+		//Given
+		setUpData();
+
+		Member expectedMember = new Member();
+		expectedMember.setId(2L);
+		expectedMember.setName("Haeyup");
+		expectedMember.setEmpNo("2");
+
+		//When
+		Member member = service.updateMember(expectedMember);
+
+		//Then
+		assertEquals(expectedMember.getName(), member.getName());
+	}
+
 	private void setUpData() {
 		Member member1 = new Member("1", "Daeyoung");
 		Member member2 = new Member("2", "Heemin");

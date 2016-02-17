@@ -50,6 +50,21 @@ public class CoffeeService {
 		return memberRepository.findAll();
 	}
 
+	public Member findMemberByEmpNo(String empNo) {
+		return memberRepository.findByEmpNo(empNo);
+	}
+
+	@Transactional
+	public void deleteMemberByEmpNo(String empNo) {
+
+		memberRepository.deleteByEmpNo(empNo);
+	}
+
+	@Transactional
+	public Member updateMember(Member member) {
+		return memberRepository.save(member);
+	}
+
 	@Transactional
 	public Shop addShop(Shop shop) {
 		return shopRepository.save(shop);
@@ -146,13 +161,5 @@ public class CoffeeService {
 
 	}
 
-	public Member findMemberByEmpNo(String empNo) {
-		return memberRepository.findByEmpNo(empNo);
-	}
 
-	@Transactional
-	public void deleteMemberByEmpNo(String empNo) {
-
-		memberRepository.deleteByEmpNo(empNo);
-	}
 }
