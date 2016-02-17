@@ -29,12 +29,10 @@ public class MemberController {
 	@RequestMapping(value = "/{empNo}",method = RequestMethod.GET)
 	public MemberDto findOne(@PathVariable String empNo) {
 
-
 		Member member = service.findMember(empNo);
 
-
 		MemberDto memberDto = new MemberDto();
-		BeanUtils.copyProperties(member, memberDto);
+		if(member != null) BeanUtils.copyProperties(member, memberDto);
 
 		return memberDto;
 	}

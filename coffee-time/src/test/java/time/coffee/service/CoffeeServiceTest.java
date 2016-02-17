@@ -21,7 +21,8 @@ import static org.junit.Assert.assertNotNull;
 @SpringApplicationConfiguration(classes = Application.class)
 @Transactional
 @Rollback
-public class CoffeeAdminServiceTest {
+public class CoffeeServiceTest {
+
 	@Autowired
 	private CoffeeService coffeeAdminService;
 

@@ -13,12 +13,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import time.coffee.Application;
 import time.coffee.domain.Member;
 import time.coffee.service.CoffeeService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,9 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
+//@WebIntegrationTest(randomPort = true)
 @Transactional
 @Rollback
 public class MemberControllerTest {
+
+	// @Value("${local.server.port}")
+	// private int port;
 
 	private MockMvc mockMvc;
 
@@ -41,8 +45,7 @@ public class MemberControllerTest {
 	@Autowired
 	private CoffeeService service;
 
-	//@Autowired
-	private TestRestTemplate testRestTemplate;
+	private TestRestTemplate testRestTemplate = new TestRestTemplate();
 
 	@Before
 	public void setUp() throws Exception {
@@ -53,6 +56,10 @@ public class MemberControllerTest {
 	public void testFindAll() throws Exception {
 		setUpData();
 
+		//MemberDto memberDto = testRestTemplate.getForObject("http://localhost:" + port + "/members/{empNo}", MemberDto.class, "1");
+
+		//System.out.println(memberDto.getName());
+		//assertNotNull(memberDto);
 		mockMvc.perform(get("/members")
 				.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
