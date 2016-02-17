@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import time.coffee.Application;
+import time.coffee.domain.Member;
+import time.coffee.service.CoffeeAdminService;
 
 import java.util.List;
 
@@ -32,6 +34,9 @@ public class MemberControllerTest {
 	@Autowired
 	private WebApplicationContext wac;
 
+	@Autowired
+	private CoffeeAdminService service;
+
 //	@Autowired
 	private TestRestTemplate testRestTemplate;
 
@@ -42,12 +47,22 @@ public class MemberControllerTest {
 
 	@Test
 	public void testFindAll() throws Exception {
+		setUpData();
+
 		mockMvc.perform(get("/members")
 				.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+	}
+
+	private void setUpData() {
+		Member member1 = new Member("1", "Daeyoung");
+		Member member2 = new Member("2", "Heemin");
+
+		service.addMember(member1);
+		service.addMember(member2);
 	}
 
 
