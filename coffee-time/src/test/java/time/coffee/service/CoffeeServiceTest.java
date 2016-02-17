@@ -58,6 +58,22 @@ public class CoffeeServiceTest {
 
 	}
 
+	@Test
+	public void testDeleteMemberByEmpno() {
+		//Given
+		setUpData();
+
+		//When
+		service.deleteMemberByEmpNo("1");
+
+		List<Member> members = service.findMembers();
+
+		//Then
+		assertEquals(members.size(), 1);
+
+
+	}
+
 	private void setUpData() {
 		Member member1 = new Member("1", "Daeyoung");
 		Member member2 = new Member("2", "Heemin");

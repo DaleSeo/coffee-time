@@ -5,4 +5,5 @@ import time.coffee.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 	Member findByEmpNo(String empNo);
+	void deleteByEmpNo(String empNo);
 }

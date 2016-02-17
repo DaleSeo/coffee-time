@@ -149,4 +149,10 @@ public class CoffeeService {
 	public Member findMemberByEmpNo(String empNo) {
 		return memberRepository.findByEmpNo(empNo);
 	}
+
+	@Transactional
+	public void deleteMemberByEmpNo(String empNo) {
+
+		memberRepository.deleteByEmpNo(empNo);
+	}
 }
