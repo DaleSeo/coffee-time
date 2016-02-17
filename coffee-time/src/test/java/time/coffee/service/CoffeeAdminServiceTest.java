@@ -1,12 +1,11 @@
 package time.coffee.service;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import time.coffee.Application;
@@ -19,13 +18,12 @@ import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @Transactional
 @Rollback
 public class CoffeeAdminServiceTest {
-
 	@Autowired
-	CoffeeAdminService coffeeAdminService;
+	private CoffeeAdminService coffeeAdminService;
 
 	@Before
 	public void setup() {

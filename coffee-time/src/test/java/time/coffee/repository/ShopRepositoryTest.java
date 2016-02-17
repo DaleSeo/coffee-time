@@ -3,7 +3,7 @@ package time.coffee.repository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import time.coffee.Application;
 import time.coffee.domain.Shop;
@@ -13,7 +13,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class ShopRepositoryTest {
 
 	@Autowired
