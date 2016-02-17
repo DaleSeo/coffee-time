@@ -80,7 +80,7 @@ public class CoffeeServiceTest {
 		setUpData();
 
 		Member expectedMember = new Member();
-		// expectedMember.setId(2L);
+		expectedMember.setId(2L);
 		expectedMember.setName("Haeyup");
 		expectedMember.setEmpNo("2");
 
