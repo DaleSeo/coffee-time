@@ -62,7 +62,9 @@ public class CoffeeService {
 
 	@Transactional
 	public Member updateMember(Member member) {
-		return memberRepository.save(member);
+		Member found = findMemberByEmpNo(member.getEmpNo());
+		found.setName(member.getName());
+		return found;
 	}
 
 	@Transactional
