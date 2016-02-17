@@ -45,6 +45,19 @@ public class CoffeeServiceTest {
 		assertEquals(members.size(), 2);
 	}
 
+	@Test
+	public void testFindMember() {
+		//Given
+		setUpData();
+
+		//When
+		Member member = service.findMemberByEmpNo("2");
+
+		//Then
+		assertEquals(member.getName(), "Heemin");
+
+	}
+
 	private void setUpData() {
 		Member member1 = new Member("1", "Daeyoung");
 		Member member2 = new Member("2", "Heemin");

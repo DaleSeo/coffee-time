@@ -146,7 +146,7 @@ public class CoffeeService {
 
 	}
 
-	public Member findMember(String empNo) {
+	public Member findMemberByEmpNo(String empNo) {
 		return memberRepository.findByEmpNo(empNo);
 	}
 }
