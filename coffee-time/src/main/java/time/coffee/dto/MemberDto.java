@@ -11,6 +11,9 @@ public class MemberDto {
 
 	private String empNo;
 
+	public MemberDto() {
+	}
+
 	public MemberDto(Member entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();

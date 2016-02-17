@@ -23,7 +23,7 @@ import static org.junit.Assert.assertNotNull;
 @Rollback
 public class CoffeeAdminServiceTest {
 	@Autowired
-	private CoffeeAdminService coffeeAdminService;
+	private CoffeeService coffeeAdminService;
 
 	@Before
 	public void setup() {

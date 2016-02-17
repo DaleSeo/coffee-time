@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import time.coffee.Application;
 import time.coffee.domain.Member;
-import time.coffee.service.CoffeeAdminService;
+import time.coffee.service.CoffeeService;
 
 import java.util.List;
 
@@ -27,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
+@Transactional
+@Rollback
 public class MemberControllerTest {
 
 	private MockMvc mockMvc;
@@ -35,9 +39,9 @@ public class MemberControllerTest {
 	private WebApplicationContext wac;
 
 	@Autowired
-	private CoffeeAdminService service;
+	private CoffeeService service;
 
-//	@Autowired
+	//@Autowired
 	private TestRestTemplate testRestTemplate;
 
 	@Before
@@ -55,6 +59,18 @@ public class MemberControllerTest {
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+	}
+
+	@Test
+	public void testFindOne() throws Exception {
+		setUpData();
+		mockMvc.perform(get("/members/{id}", 1)
+						.accept(MediaType.APPLICATION_JSON_UTF8)
+		)
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+
 	}
 
 	private void setUpData() {
