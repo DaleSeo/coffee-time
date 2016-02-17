@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,28 +25,34 @@ import static org.junit.Assert.assertNotNull;
 public class CoffeeServiceTest {
 
 	@Autowired
-	private CoffeeService coffeeAdminService;
+	private CoffeeService service;
 
 	@Before
 	public void setup() {
-		assertNotNull(coffeeAdminService);
+		assertNotNull(service);
 	}
 
 	@Test
-	public void addAndFindMember() {
+	public void testFindMembers() {
 		//Given
-		String empNo = "1234";
-		String name = "test";
-		Member member = new Member(empNo, name);
+		setUpData();
 
 		//When
-		Long memberId = coffeeAdminService.addMember(member);
-		List<Member> members = coffeeAdminService.findMembers();
+		List<Member> members = service.findMembers();
 
 		//Then
-		assertNotNull(memberId);
-		assertEquals(members.size(), 1);
+		assertFalse(members.isEmpty());
+		assertEquals(members.size(), 2);
 	}
+
+	private void setUpData() {
+		Member member1 = new Member("1", "Daeyoung");
+		Member member2 = new Member("2", "Heemin");
+
+		service.addMember(member1);
+		service.addMember(member2);
+	}
+
 
 	@Test
 	public void addAndFindShop() {
@@ -65,10 +72,10 @@ public class CoffeeServiceTest {
 		Shop shop = new Shop();
 		shop.setName("shop");
 
-		Shop addedShop = coffeeAdminService.addShop(shop);
-		Menu menu = coffeeAdminService.addMenu(addedShop.getId(), "default menu", "default menu desc");
+		Shop addedShop = service.addShop(shop);
+		Menu menu = service.addMenu(addedShop.getId(), "default menu", "default menu desc");
 
-		Survey survey = coffeeAdminService.addSurvey(addedShop.getId(), new Date(), "description", menu.getId());
+		Survey survey = service.addSurvey(addedShop.getId(), new Date(), "description", menu.getId());
 
 		Member member = new Member("empNo1", "member1");
 
@@ -77,11 +84,11 @@ public class CoffeeServiceTest {
 		order.setMember(member);
 		order.setMessage("message1");
 
-		coffeeAdminService.addMember(member);
+		service.addMember(member);
 
-		coffeeAdminService.addOrder(order);
+		service.addOrder(order);
 
-		List<Order> orders = coffeeAdminService.findOrders(survey.getId());
+		List<Order> orders = service.findOrders(survey.getId());
 
 		assertNotNull(orders);
 
