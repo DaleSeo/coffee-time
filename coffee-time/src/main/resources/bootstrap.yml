@@ -1,6 +1,6 @@
 spring:
   main:
-    banner_mode: none
+    banner_mode: false
   application:
     name: coffee-time
     version: 1.0.0
