@@ -51,7 +51,12 @@ public class CoffeeService {
 	}
 
 	public Member findMemberByEmpNo(String empNo) {
-		return memberRepository.findByEmpNo(empNo);
+		Member found = memberRepository.findByEmpNo(empNo);
+		if (found == null) {
+			throw new IllegalArgumentException("Unknown empNo: " + empNo);
+		}
+
+		return found;
 	}
 
 	@Transactional
@@ -62,10 +67,7 @@ public class CoffeeService {
 
 	@Transactional
 	public Member updateMember(Member member) {
-		Member found = memberRepository.findOne(member.getId());
-        if (found == null) {
-            throw new IllegalArgumentException("Unknown member id: " + member.getId());
-        }
+		Member found = findMemberByEmpNo(member.getEmpNo());
 
 		found.setEmpNo(member.getEmpNo());
 		found.setName(member.getName());
