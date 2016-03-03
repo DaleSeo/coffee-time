@@ -1,4 +1,5 @@
 spring:
+  output.ansi.enabled: ALWAYS
   jpa:
     database: h2
     show_sql: true
