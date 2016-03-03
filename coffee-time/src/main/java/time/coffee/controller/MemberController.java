@@ -1,12 +1,12 @@
 package time.coffee.controller;
 
 import com.google.common.collect.Lists;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import time.coffee.domain.Member;
 import time.coffee.dto.MemberDto;
 import time.coffee.service.CoffeeService;
+import time.coffee.util.BeanConverter;
 
 import java.util.List;
 
@@ -19,39 +19,27 @@ public class MemberController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<MemberDto> findAll() {
-
-		return Lists.transform(service.findMembers(), member -> new MemberDto(member));
+		return Lists.transform(service.findMembers(), member -> BeanConverter.convert(member, MemberDto.class));
 	}
 
 	@RequestMapping(value = "/{empNo}",method = RequestMethod.GET)
 	public MemberDto findOne(@PathVariable String empNo) {
-
 		Member member = service.findMemberByEmpNo(empNo);
-
-		MemberDto memberDto = new MemberDto();
-		if(member != null) BeanUtils.copyProperties(member, memberDto);
-
-		return memberDto;
+		return BeanConverter.convert(member, MemberDto.class);
 	}
 
-	//TODO: 객체 Mapping을 Controller에서 구현
 	@RequestMapping(method = RequestMethod.POST)
-	public MemberDto addMember(@RequestBody MemberDto member) {
-		Member newMember = member.convertToEntity();    // FIXME
+	public MemberDto addMember(@RequestBody MemberDto memberDto) {
+		Member newMember = BeanConverter.convert(memberDto, Member.class);
 		service.addMember(newMember);
-		return new MemberDto(newMember);
+		return BeanConverter.convert(newMember, MemberDto.class);
 	}
 
 	@RequestMapping(value = "/{empNo}", method = RequestMethod.PUT)
 	public MemberDto updateMember(@PathVariable String empNo, @RequestBody MemberDto memberDto) {
-		Member member = new Member();
 		memberDto.setEmpNo(empNo);
-		if(memberDto != null) BeanUtils.copyProperties(memberDto, member);
-		Member updateMember = service.updateMember(member);
-
-		MemberDto result = new MemberDto();
-		if(updateMember != null) BeanUtils.copyProperties(updateMember, result);
-		return result;
+		Member updateMember = service.updateMember(BeanConverter.convert(memberDto, Member.class));
+		return BeanConverter.convert(updateMember, MemberDto.class);
 	}
 
 	@RequestMapping(value = "/{empNo}", method = RequestMethod.DELETE)
