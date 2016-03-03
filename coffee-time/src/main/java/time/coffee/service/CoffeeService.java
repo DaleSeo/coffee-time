@@ -83,6 +83,24 @@ public class CoffeeService {
 		return shopRepository.findAll();
 	}
 
+	public Shop findShop(long id) {
+		return shopRepository.findOne(id);
+	}
+
+
+	public Shop findShopByName(String name) {
+		return shopRepository.findByName(name);
+	}
+
+	@Transactional
+	public Shop updateShop(Shop shop) {
+		Shop found = shopRepository.findOne(shop.getId());
+		found.setName(shop.getName());
+		found.setTel(shop.getTel());
+		found.setDescription(shop.getDescription());
+		return found;
+	}
+
 	/**
 	 * 설문조사를 추가합니다.
 	 */
@@ -170,5 +188,8 @@ public class CoffeeService {
 
 	}
 
-
+	@Transactional
+	public void deleteShop(Long id) {
+		shopRepository.delete(id);
+	}
 }

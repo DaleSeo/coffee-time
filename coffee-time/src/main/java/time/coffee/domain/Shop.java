@@ -24,6 +24,15 @@ public class Shop {
 	@OneToMany(mappedBy = "shop")
 	private List<Menu> menus;
 
+	public Shop() {
+	}
+
+	public Shop(String name, String tel, String description) {
+		this.name = name;
+		this.tel = tel;
+		this.description = description;
+	}
+
     public Long getId() {
         return id;
     }
