@@ -1,6 +1,5 @@
 package time.coffee.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +42,8 @@ public class ShopControllerTest {
 	@Autowired
 	private CoffeeService coffeeService;
 
+	ObjectMapper objectMapper = new ObjectMapper();
+
 	@Before
 	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -77,7 +78,7 @@ public class ShopControllerTest {
 		shopDto.setTel("031-xxx-xxxx");
 		shopDto.setDescription("맛나요 커피.");
 		mockMvc.perform(post("/shops")
-						.content(toJsonString(shopDto))
+						.content(objectMapper.writeValueAsString(shopDto))
 						.contentType(MediaType.APPLICATION_JSON_UTF8)
 						.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
@@ -97,7 +98,7 @@ public class ShopControllerTest {
 		shopDto.setDescription("맛나요 커피.");
 
 		mockMvc.perform(put("/shops/{id}", 1)
-						.content(toJsonString(shopDto))
+						.content(objectMapper.writeValueAsString(shopDto))
 						.contentType(MediaType.APPLICATION_JSON_UTF8)
 						.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
@@ -121,9 +122,5 @@ public class ShopControllerTest {
 		Shop shop = new Shop("머스트커피", "031-xxx-xxxx", "맛나요 커피.");
 		coffeeService.addShop(shop);
 		coffeeService.addShop(new Shop("구라비티커피", "031-xxx-yyyy", "머스트커피 옆집."));
-	}
-	private static String toJsonString(Object obj) throws JsonProcessingException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.writeValueAsString(obj);
 	}
 }
