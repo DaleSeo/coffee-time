@@ -45,7 +45,7 @@ public class BeanConverter {
      */
     public static <T> List<T> listTransform(List<?> source, Class<T> targetType, ListTransformListener callback) {
         return Lists.transform(source, o -> {
-            T targetObject = convert(source, targetType);
+            T targetObject = convert(o, targetType);
             if (callback != null) callback.copyDone(o, targetObject);
             return targetObject;
         });
