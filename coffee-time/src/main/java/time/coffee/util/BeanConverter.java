@@ -45,13 +45,7 @@ public class BeanConverter {
      */
     public static <T> List<T> listTransform(List<?> source, Class<T> targetType, ListTransformListener callback) {
         return Lists.transform(source, o -> {
-            T targetObject;
-            try {
-                targetObject = targetType.newInstance();
-            } catch (InstantiationException | IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-            BeanUtils.copyProperties(o, targetObject);
+            T targetObject = convert(source, targetType);
             if (callback != null) callback.copyDone(o, targetObject);
             return targetObject;
         });
