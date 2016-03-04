@@ -1,6 +1,5 @@
 package time.coffee.controller;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import time.coffee.domain.Member;
@@ -19,7 +18,7 @@ public class MemberController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<MemberDto> findAll() {
-		return Lists.transform(service.findMembers(), member -> BeanConverter.convert(member, MemberDto.class));
+		return BeanConverter.listTransform(service.findMembers(), MemberDto.class);
 	}
 
 	@RequestMapping(value = "/{empNo}",method = RequestMethod.GET)

@@ -1,6 +1,5 @@
 package time.coffee.controller;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import time.coffee.domain.Shop;
@@ -19,7 +18,7 @@ public class ShopController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<ShopDto> findAll() {
-		return Lists.transform(service.findShops(), shop -> BeanConverter.convert(shop, ShopDto.class));
+		return BeanConverter.listTransform(service.findShops(), ShopDto.class);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
