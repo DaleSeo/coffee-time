@@ -1,6 +1,5 @@
 package time.coffee.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -51,6 +50,8 @@ public class MemberControllerTest {
 	private CoffeeService service;
 
 	private TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+	ObjectMapper objectMapper = new ObjectMapper();
 
 	@Before
 	public void setUp() throws Exception {
@@ -114,7 +115,7 @@ public class MemberControllerTest {
 		MemberDto memberDto = new MemberDto();
 		memberDto.setName("haeyup");
 		mockMvc.perform(put("/members/{empNo}", 1)
-						.content(toJsonString(memberDto))
+						.content(objectMapper.writeValueAsString(memberDto))
 						.contentType(MediaType.APPLICATION_JSON_UTF8)
 						.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
@@ -123,10 +124,6 @@ public class MemberControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 	}
 
-	private static String toJsonString(Object obj) throws JsonProcessingException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.writeValueAsString(obj);
-	}
 
 	@Test
 	public void testDeleteMember() throws Exception {
@@ -146,7 +143,7 @@ public class MemberControllerTest {
 		memberDto.setEmpNo("100");
 		memberDto.setName("haeyup");
 		mockMvc.perform(post("/members")
-						.content(toJsonString(memberDto))
+						.content(objectMapper.writeValueAsString(memberDto))
 						.contentType(MediaType.APPLICATION_JSON_UTF8)
 						.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
