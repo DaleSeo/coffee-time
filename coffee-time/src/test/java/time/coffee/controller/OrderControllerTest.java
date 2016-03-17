@@ -60,6 +60,9 @@ public class OrderControllerTest {
     @Autowired
     private ShopRepository shopRepository;
 
+    @Autowired
+    private OrderService orderService;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
@@ -106,6 +109,46 @@ public class OrderControllerTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testFindOrdersBySurveyId() throws Exception {
+        Shop shop = new Shop();
+        shop.setName("스파커피");
+        shopRepository.save(shop);
+
+        Menu menu = new Menu();
+        menu.setName("아메리카노");
+        menu.setShop(shop);
+        menuRepository.save(menu);
+
+        Member member = new Member();
+        member.setEmpNo("9230001");
+        member.setName("양해엽");
+        memberRepository.save(member);
+
+        Member member2 = new Member();
+        member2.setEmpNo("9230002");
+        member2.setName("정희원");
+        memberRepository.save(member2);
+
+
+        Survey survey = new Survey();
+        survey.setShop(shop);
+        survey.setDeadline(new Date());
+        surveyRepository.save(survey);
+
+        orderService.addOrder("9230001", survey.getId(), menu.getId(), "감삼다");
+        orderService.addOrder("9230002", survey.getId(), menu.getId(), "감삼다2");
+
+        mockMvc.perform(get("/orders?surveyId=" + survey.getId())
+                        .accept(MediaType.APPLICATION_JSON_UTF8)
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+
+
     }
 
 }

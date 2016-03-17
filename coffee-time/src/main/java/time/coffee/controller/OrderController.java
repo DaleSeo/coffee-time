@@ -2,15 +2,13 @@ package time.coffee.controller;
 
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import time.coffee.dto.OrderDto;
 import time.coffee.service.OrderService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,8 +18,8 @@ import java.util.Map;
  * - 주문 만들기
  *
  * [Admin]
- * - 주문 결과 상세 조회
- * - 주문용 통계
+ * - 주문 결과 상세 조회 by surveyId
+ * - 주문용 통계 by surveyId
  */
 @RestController
 @RequestMapping("/orders")
@@ -38,5 +36,10 @@ public class OrderController {
         HashMap<Object, Object> res = Maps.newHashMap();
         res.put("orderId", orderId);
         return res;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List findOrdersBySurveyId(@RequestParam Long surveyId) {
+        return orderService.findBySurveyId(surveyId);
     }
 }
