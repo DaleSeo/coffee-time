@@ -16,6 +16,14 @@ public class Menu {
 
     private String description;
 
+    public Menu() {
+    }
+
+    public Menu(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
