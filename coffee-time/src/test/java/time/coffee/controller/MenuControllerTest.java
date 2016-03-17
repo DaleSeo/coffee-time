@@ -59,7 +59,8 @@ public class MenuControllerTest {
 	@Test
 	public void testFindById() throws Exception {
 		setUpData();
-		mockMvc.perform(get("/menus/{id}", 1)
+        Menu menu = menuService.findByName("카페라떼").get(0);
+		mockMvc.perform(get("/menus/{id}", menu.getId())
 						.accept(MediaType.APPLICATION_JSON_UTF8)
 		)
 				.andDo(print())
@@ -69,7 +70,6 @@ public class MenuControllerTest {
 
 	}
 
-	@Ignore
 	@Test
 	public void testAddMenu() throws Exception {
 		setUpData();
@@ -92,9 +92,10 @@ public class MenuControllerTest {
 	@Test
 	public void testUpdateMenu() throws Exception {
 		setUpData();
+        Menu menu = menuService.findByName("카페라떼").get(0);
 		MenuDto menuDto = new MenuDto();
-		menuDto.setName("haeyup");
-		mockMvc.perform(put("/menus/{id}", 1)
+		menuDto.setName("아메리카노");
+		mockMvc.perform(put("/menus/{id}", menu.getId())
 						.content(objectMapper.writeValueAsString(menuDto))
 						.contentType(MediaType.APPLICATION_JSON_UTF8)
 						.accept(MediaType.APPLICATION_JSON_UTF8)
@@ -104,20 +105,20 @@ public class MenuControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 	}
 
-
 	@Test
 	public void testDeleteMenu() throws Exception {
 		setUpData();
-		mockMvc.perform(delete("/menus/{id}", 1)
+        Menu menu = menuService.findByName("카페라떼").get(0);
+		mockMvc.perform(delete("/menus/{id}", menu.getId())
 		)
 				.andDo(print())
 				.andExpect(status().isOk());
 
 		try {
-			menuService.findById(1);
+			menuService.findById(menu.getId());
 			fail();
 		} catch(IllegalArgumentException e) {
-			assertEquals("Unknown menu id: 1", e.getMessage());
+			assertEquals("Unknown menu id: " + menu.getId(), e.getMessage());
 		}
 	}
 
