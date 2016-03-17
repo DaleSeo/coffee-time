@@ -1,18 +1,15 @@
 package time.coffee.dto;
 
 
-import time.coffee.domain.Menu;
-import time.coffee.domain.Shop;
-
 import java.util.Date;
 
 public class SurveyDto {
 
     private Long id;
 
-    private Menu defaultMenu;
+//    private MenuDto defaultMenu;
 
-    private Shop shop;
+    private ShopDto shop;
 
     private Date deadline;
 
@@ -26,19 +23,20 @@ public class SurveyDto {
         this.id = id;
     }
 
-    public Menu getDefaultMenu() {
-        return defaultMenu;
-    }
+//    public Menu getDefaultMenu() {
+//        return defaultMenu;
+//    }
+//
+//    public void setDefaultMenu(Menu defaultMenu) {
+//        this.defaultMenu = defaultMenu;
+//    }
 
-    public void setDefaultMenu(Menu defaultMenu) {
-        this.defaultMenu = defaultMenu;
-    }
 
-    public Shop getShop() {
+    public ShopDto getShop() {
         return shop;
     }
 
-    public void setShop(Shop shop) {
+    public void setShop(ShopDto shop) {
         this.shop = shop;
     }
 

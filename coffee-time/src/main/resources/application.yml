@@ -8,9 +8,10 @@ spring:
     hibernate:
       ddl-auto: create
       dialect: org.hibernate.dialect.H2Dialect
+      generate_statistics: true
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:~/testdb
+    url: jdbc:h2:tcp://localhost/~/test
     username: sa
     password:
 

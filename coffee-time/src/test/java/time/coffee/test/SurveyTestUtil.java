@@ -9,7 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 public class SurveyTestUtil {
-
+    public static void main(String[] args) {
+        System.out.println((new Date()).getTime());
+    }
 
     public static List<Survey> getDummySurveyList() {
         Shop shop = new Shop();
