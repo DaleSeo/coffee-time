@@ -59,4 +59,9 @@ public class Survey {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public boolean isAvailable() {
+        // TODO 현재 시간관 비교해서 유효한지 판단해야 함
+        return true;
+    }
 }
