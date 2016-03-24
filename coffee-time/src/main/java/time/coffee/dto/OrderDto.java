@@ -18,6 +18,16 @@ public class OrderDto {
     @NotNull
     private Long surveyId;
 
+    /**
+     * 메뉴명
+     */
+    private String menuNm;
+
+    /**
+     * 회원명
+     */
+    private String empNm;
+
     private String message;
 
     public String getEmpNo() {
@@ -50,5 +60,21 @@ public class OrderDto {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getMenuNm() {
+        return menuNm;
+    }
+
+    public void setMenuNm(String menuNm) {
+        this.menuNm = menuNm;
+    }
+
+    public String getEmpNm() {
+        return empNm;
+    }
+
+    public void setEmpNm(String empNm) {
+        this.empNm = empNm;
     }
 }

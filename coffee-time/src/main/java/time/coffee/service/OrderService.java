@@ -1,7 +1,7 @@
 package time.coffee.service;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +9,7 @@ import time.coffee.domain.Member;
 import time.coffee.domain.Menu;
 import time.coffee.domain.Order;
 import time.coffee.domain.Survey;
+import time.coffee.dto.OrderDto;
 import time.coffee.repository.MemberRepository;
 import time.coffee.repository.MenuRepository;
 import time.coffee.repository.OrderRepository;
@@ -35,6 +36,7 @@ public class OrderService {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Transactional
     public Long addOrder(String empNo, Long surveyId, Long menuId, String msg) {
 
         Member mem = memberRepository.findByEmpNo(empNo);
@@ -63,5 +65,19 @@ public class OrderService {
 
         orderRepository.save(ord);
         return ord.getId();
+    }
+
+    public List<OrderDto> findBySurveyId(Long surveyId) {
+        List<Order> list = orderRepository.findBySurveyId(surveyId);
+        List<OrderDto> res = Lists.newArrayList();
+        for (Order order : list) {
+            OrderDto r = new OrderDto();
+            r.setEmpNm(order.getMember().getName());
+            r.setMenuNm(order.getMenu().getName());
+            r.setMessage(order.getMessage());
+            r.setEmpNo(order.getMember().getEmpNo());
+            res.add(r);
+        }
+        return res;
     }
 }
