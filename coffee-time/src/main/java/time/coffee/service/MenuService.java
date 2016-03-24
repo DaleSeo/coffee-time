@@ -24,30 +24,30 @@ public class MenuService {
         return menuRepository.findByShopId(shopId);
     }
 
-    public Menu findByName(String name) {
-        Menu found = menuRepository.findByName(name);
-        if (found == null) {
-            throw  new IllegalArgumentException("Unknown menu name: " + name);
-        }
+    public List<Menu> findByName(String name) {
+        List<Menu> found = menuRepository.findByName(name);
         return found;
     }
 
+	public Menu findById(long id) {
+		Menu found = menuRepository.findOne(id);
+		if (found == null) {
+			throw  new IllegalArgumentException("Unknown menu id: " + id);
+		}
+		return found;
+	}
+
     @Transactional
-    public void updateMenu(Menu menu) {
-        Menu found = menuRepository.findOne(menu.getId());
-        if (found == null) {
-            throw  new IllegalArgumentException("Unknown menu id: " + menu.getId());
-        }
+    public Menu updateMenu(Menu menu) {
+        Menu found = findById(menu.getId());
         found.setName(menu.getName());
         found.setDescription(menu.getDescription());
+	    return found;
     }
 
     @Transactional
-    public void deleteMenu(Menu menu) {
-        Menu found = menuRepository.findOne(menu.getId());
-        if (found == null) {
-            throw  new IllegalArgumentException("Unknown menu id: " + menu.getId());
-        }
-        menuRepository.delete(menu);
+    public void deleteById(long id) {
+	    Menu found = findById(id);
+        menuRepository.delete(found);
     }
 }
