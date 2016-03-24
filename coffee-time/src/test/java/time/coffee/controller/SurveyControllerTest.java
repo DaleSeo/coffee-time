@@ -86,12 +86,12 @@ public class SurveyControllerTest {
 
     @Test
     public void testAdd() throws Exception {
-        ShopDto surveyDto = new ShopDto();
-        surveyDto.setName("머스트커피");
-        surveyDto.setTel("031-xxx-xxxx");
-        surveyDto.setDescription("맛나요 커피.");
+        ShopDto shopDto = new ShopDto();
+        shopDto.setName("머스트커피");
+        shopDto.setTel("031-xxx-xxxx");
+        shopDto.setDescription("맛나요 커피.");
         mockMvc.perform(post("/surveys")
-                        .content(objectMapper.writeValueAsString(surveyDto))
+                        .content(objectMapper.writeValueAsString(shopDto))
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         )
@@ -105,13 +105,13 @@ public class SurveyControllerTest {
     public void testUpdateShop() throws Exception {
         setUpData();
 
-        ShopDto surveyDto = new ShopDto();
-        surveyDto.setName("머스트커피2");
-        surveyDto.setTel("031-xxx-xxxx");
-        surveyDto.setDescription("맛나요 커피.");
+        ShopDto shopDto = new ShopDto();
+        shopDto.setName("머스트커피2");
+        shopDto.setTel("031-xxx-xxxx");
+        shopDto.setDescription("맛나요 커피.");
 
         mockMvc.perform(put("/surveys/{id}", 1)
-                        .content(objectMapper.writeValueAsString(surveyDto))
+                        .content(objectMapper.writeValueAsString(shopDto))
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         )
