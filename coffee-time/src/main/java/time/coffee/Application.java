@@ -34,11 +34,11 @@ public class Application {
 
 	private Predicate<String> apiPaths() {
 		return or(
-				regex("/members/.*"),
-				regex("/menus/.*"),
-				regex("/orders/.*"),
-				regex("/shops/.*"),
-				regex("/surveys/.*")
+				regex("/members.*"),
+				regex("/menus.*"),
+				regex("/orders.*"),
+				regex("/shops.*"),
+				regex("/surveys.*")
 		);
 	}
 
