@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author 서대영/Store기술개발팀/SKP
  */
 @Controller
-public class HelloController {
+public class HelloWebController {
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello() {

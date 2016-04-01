@@ -46,11 +46,19 @@
 
 <div class="container">
 
-    <div class="jumbotron">
-        <h1>Coffee Time</h1>
-        <p>...</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Hello, World!</a></p>
+    <div>
+        <br/><br/><br/><br/><br/><br/><br/>
     </div>
+
+
+    <button id="btnAdd" class="btn btn-primary">add</button>
+
+    <table class="table">
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+    </table>
 
     <div class="starter-template">
         <h1>Bootstrap starter template</h1>
@@ -58,6 +66,13 @@
     </div>
 
 </div><!-- /.container -->
+
+<script>
+    $('#btnAdd').click(function(){
+        location.href="/web/member/create";
+    });
+
+</script>
 
 </body>
 
