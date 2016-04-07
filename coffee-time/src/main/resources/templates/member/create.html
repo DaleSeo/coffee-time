@@ -4,6 +4,7 @@
 </head>
 
 <body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 <div th:replace="fragments/menu :: menu">
 </div>
 
@@ -28,8 +29,43 @@
 </div><!-- /.container -->
 
 <script>
-    $('#submit').click(function(){
-        location.href="/web/member/create";
+    // TODO 별도의 javascript 로독립
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+    $(document).ready(function() {
+
+        $("#member").submit(function() {
+            $.ajax({
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify($(this).serializeObject()),
+                method: 'POST',
+                url: '/members',
+                success: function(d) {
+                    alert("등록되었습니다. #" + d['id']);
+                },
+                error: function(xhr) {
+                    var res = $.parseJSON(xhr.responseText);
+                    alert("에러가 났습니다.\n" + res['message']);
+                }
+            });
+
+            return false;
+        });
     });
 
 </script>
