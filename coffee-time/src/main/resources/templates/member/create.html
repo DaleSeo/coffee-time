@@ -9,8 +9,8 @@
 
 <div class="container">
 
-    <div>
-        <br/><br/><br/><br/><br/><br/><br/>
+    <div class="page-header">
+        <h3>회원 등록</h3>
     </div>
 
     <form id="memberForm">
@@ -22,7 +22,14 @@
             <label for="name">이름</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="이름"/>
         </div>
-        <button id="createBtn" type="button" class="btn btn-default">등록</button>
+        <div class="form-group pull-right">
+            <button id="createBtn" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-save"></span> 등록
+            </button>
+            <a th:href="@{/web/member/list}" class="btn btn-default">
+                <span class="glyphicon glyphicon-step-backward"></span> 취소
+            </a>
+        </div>
     </form>
 
 </div><!-- /.container -->
@@ -31,7 +38,8 @@
 $('#createBtn').click(function() {
     $.post("/members", toJson("#memberForm"))
             .done(function(data) {
-                alert("등록되었습니다. #" + data.id);
+                alert("등록되었습니다. #" + data.empNo);
+                location.href = '/web/member/detail?empNo=' + data.empNo;
             })
             .fail(function(data) {
                 alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');

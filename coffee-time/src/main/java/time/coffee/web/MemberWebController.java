@@ -21,4 +21,9 @@ public class MemberWebController {
 		return "member/create";
 	}
 
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String detail() {
+		return "member/detail";
+	}
+
 }

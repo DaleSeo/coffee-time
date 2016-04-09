@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+
+<body>
+<div th:replace="fragments/menu :: menu">
+</div>
+
+<div class="container">
+
+    <div class="page-header">
+        <h3>회원 상세</h3>
+    </div>
+
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <td id="id">0</td>
+        </tr>
+        <tr>
+            <th>사번</th>
+            <td id="empNo"><span th:text="${param.empNo[0]}" th:unless="${param.empNo == null}">9230001</span></td>
+        </tr>
+        <tr>
+            <th>이름</th>
+            <td id="name">나직원</td>
+        </tr>
+    </table>
+
+    <div class="form-group pull-right" role="group">
+        <a th:href="@{/web/member/list}" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> 목록</a>
+        <a th:href="@{/web/member/create}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 등록</a>
+        <a th:href="@{/web/member/modify}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> 수정</a>
+        <a th:href="@{/web/member/delete}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 삭제</a>
+    </div>
+
+</div><!-- /.container -->
+
+<script>
+$(function() {
+    initData();
+});
+
+function initData() {
+    var $empNo = $("#empNo").text();
+    if (!$empNo) {
+        alert('사번이 없습니다.')
+    }
+
+    $.getJSON('/members/' + $empNo)
+            .done(function(data) {
+                $('#id').text(data.id);
+                $('#name').text(data.name);
+            })
+            .fail(function(data) {
+                alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');
+            });
+}
+</script>
+
+</body>
+
+</html>
