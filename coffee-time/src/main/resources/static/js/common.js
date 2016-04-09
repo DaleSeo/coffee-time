@@ -1,16 +1,11 @@
-$.fn.serializeObject = function()
-{
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
-        if (o[this.name] !== undefined) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
+$.ajaxSetup({
+    contentType: "application/json; charset=UTF-8"
+});
+
+function toJson(form) {
+    var json = {};
+    $(form).serializeArray().map(function(item) {
+        json[item.name] = item.value;
     });
-    return o;
-};
+    return JSON.stringify(json);
+}

@@ -4,7 +4,6 @@
 </head>
 
 <body>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js"></script>
 <div th:replace="fragments/menu :: menu">
 </div>
 
@@ -29,25 +28,15 @@
 </div><!-- /.container -->
 
 <script>
-    $(document).ready(function() {
-
-        $("#createBtn").click(function() {
-            $.ajax({
-                contentType: 'application/json; charset=UTF-8',
-                data: JSON.stringify($(this).serializeObject()),
-                method: 'POST',
-                url: '/members',
-                success: function(d) {
-                    alert("등록되었습니다. #" + d['id']);
-                },
-                error: function(xhr) {
-                    var res = $.parseJSON(xhr.responseText);
-                    alert("에러가 났습니다.\n" + res['message']);
-                }
+$('#createBtn').click(function() {
+    $.post("/members", toJson("#memberForm"))
+            .done(function(data) {
+                alert("등록되었습니다. #" + data.id);
+            })
+            .fail(function(data) {
+                alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');
             });
-        });
-    });
-
+});
 </script>
 
 </body>
