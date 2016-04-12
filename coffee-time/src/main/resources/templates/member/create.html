@@ -49,7 +49,7 @@
 
     $(document).ready(function() {
 
-        $("#member").submit(function() {
+        $("#createBtn").click(function() {
             $.ajax({
                 contentType: 'application/json; charset=UTF-8',
                 data: JSON.stringify($(this).serializeObject()),
@@ -63,8 +63,6 @@
                     alert("에러가 났습니다.\n" + res['message']);
                 }
             });
-
-            return false;
         });
     });
 
