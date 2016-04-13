@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
+<head th:replace="fragments/layout :: header">
 </head>
 
 <body>
-<div th:replace="fragments/menu :: menu">
-</div>
+<div th:replace="fragments/layout :: menu"></div>
 
 <div class="container">
 
@@ -33,6 +32,8 @@
     </form>
 
 </div><!-- /.container -->
+
+<div th:replace="fragments/layout :: footer"></div>
 
 <script>
 $('#createBtn').click(function() {
