@@ -9,13 +9,17 @@
 <div class="container">
 
     <div class="page-header">
-        <h3>회원 등록</h3>
+        <h3>회원 수정</h3>
     </div>
 
-    <form id="formCreate">
+    <form id="formModify">
+        <div class="form-group">
+            <label for="empNo">ID</label>
+            <input type="text" class="form-control" id="id" name="id"/>
+        </div>
         <div class="form-group">
             <label for="empNo">사번</label>
-            <input type="text" class="form-control" id="empNo" name="empNo" placeholder="사번입력"/>
+            <input type="text" class="form-control" id="empNo" name="empNo" th:value="${param.empNo[0]}" th:unless="${param.empNo == null}"/>
         </div>
         <div class="form-group">
             <label for="name">이름</label>
@@ -38,12 +42,28 @@
 </body>
 
 <script>
-    $('#formCreate').submit(function(event) {
+    $(function() {
+        if (!$("#empNo").val()) {
+            alert('사번이 없습니다.');
+            return;
+        }
+
+        $.get('/members/' + $("#empNo").val())
+                .done(function(data) {
+                    $('#id').val(data.id);
+                    $('#name').val(data.name);
+                })
+                .fail(function(data) {
+                    alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');
+                });
+    });
+
+    $('#formModify').submit(function(event) {
         event.preventDefault();
 
-        $.post("/members", toJson("#formCreate"))
+        $.put("/members/" + $("#empNo").val(), toJson("#formModify"))
                 .done(function(data) {
-                    alert("등록되었습니다. #" + data.empNo);
+                    alert("수정되었습니다. #" + data.empNo);
                     location.href = '/web/member/detail?empNo=' + data.empNo;
                 })
                 .fail(function(data) {

@@ -26,4 +26,9 @@ public class MemberWebController {
 		return "member/detail";
 	}
 
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modify() {
+		return "member/modify";
+	}
+
 }
