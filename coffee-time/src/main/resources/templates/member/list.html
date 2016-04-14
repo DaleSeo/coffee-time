@@ -12,25 +12,56 @@
         <h3>회원 목록</h3>
     </div>
 
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>ID</th>
-            <th>사번</th>
-            <th>이름</th>
-        </tr>
-        <tr>
-            <td colspan="3">등록된 회원이 없습니다.</td>
-        </tr>
-    </table>
-
-    <div class="form-group pull-right" role="group">
+    <div class="form-group" role="group">
         <a th:href="@{/web/member/create}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 등록</a>
     </div>
+
+    <table id="tableMember" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>사번</th>
+                <th>이름</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">등록된 회원이 없습니다.</td>
+            </tr>
+        </tbody>
+    </table>
 
 </div><!-- /.container -->
 
 <div th:replace="fragments/layout :: footer"></div>
 
 </body>
+
+<script>
+    $(function() {
+        $('#tableMember').DataTable({
+            ajax: {
+                url: '/members',
+                dataSrc: ''
+            },
+            columns: [
+                {data: 'id'},
+                {data: 'empNo'},
+                {data: 'name'},
+                {
+                    data: 'empNo',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, full, meta) {
+                        var dtl = '<a class="btn btn-xs btn-default" href="/web/member/detail?empNo=' + data + '">상세</a>';
+                        var mod = '<a class="btn btn-xs btn-default" href="/web/member/modify?empNo=' + data + '">수정</a>';
+                        return dtl + ' ' + mod;
+                    }
+                }
+            ]
+        });
+    });
+</script>
 
 </html>
