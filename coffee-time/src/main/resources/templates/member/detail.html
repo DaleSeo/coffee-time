@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
+<head th:replace="fragments/layout :: header">
 </head>
 
 <body>
-<div th:replace="fragments/menu :: menu">
-</div>
+<div th:replace="fragments/layout :: menu"></div>
 
 <div class="container">
 
@@ -31,34 +30,45 @@
     <div class="form-group pull-right" role="group">
         <a th:href="@{/web/member/list}" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> 목록</a>
         <a th:href="@{/web/member/create}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 등록</a>
-        <a th:href="@{/web/member/modify}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> 수정</a>
-        <a th:href="@{/web/member/delete}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 삭제</a>
+        <a th:href="@{/web/member/modify(empNo=${param.empNo[0]})}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> 수정</a>
+        <button id="btnDelete" th:href="@{/web/member/delete}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 삭제</button>
     </div>
 
 </div><!-- /.container -->
 
-<script>
-$(function() {
-    initData();
-});
-
-function initData() {
-    var $empNo = $("#empNo").text();
-    if (!$empNo) {
-        alert('사번이 없습니다.')
-    }
-
-    $.getJSON('/members/' + $empNo)
-            .done(function(data) {
-                $('#id').text(data.id);
-                $('#name').text(data.name);
-            })
-            .fail(function(data) {
-                alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');
-            });
-}
-</script>
+<div th:replace="fragments/layout :: footer"></div>
 
 </body>
+
+<script>
+    $(function() {
+        if (!$("#empNo").text()) {
+            alert('사번이 없습니다.');
+            return;
+        }
+
+        $.get('/members/' + $("#empNo").text())
+                .done(function(data) {
+                    $('#id').text(data.id);
+                    $('#name').text(data.name);
+                })
+                .fail(function(data) {
+                    alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');
+                });
+    });
+
+    $("#btnDelete").click(function(event) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            $.delete("/members/" + $("#empNo").text())
+                    .done(function(data) {
+                        alert("삭제되었습니다.. #" + $("#empNo").text());
+                        location.href = '/web/member/list';
+                    })
+                    .fail(function(data) {
+                        alert(data.responseJSON.exception + ' (' + data.responseJSON.message + ')');
+                    });
+        }
+    });
+</script>
 
 </html>

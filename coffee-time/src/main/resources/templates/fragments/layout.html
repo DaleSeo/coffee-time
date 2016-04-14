@@ -22,6 +22,34 @@
 </head>
 
 <body>
+
+<div th:fragment="menu">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Coffee Time</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="#">Home</a></li>
+                    <li class=""><a href="/web/member/list">Member</a></li>
+                    <li class=""><a href="/web/shop/list">Shop</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+</div>
+
+<div>Content goes here</div>
+
+<div th:fragment="footer" class="well container text-center">Copyright &copy; OneStore JPA Study Group</div>
+
 </body>
 
 </html>

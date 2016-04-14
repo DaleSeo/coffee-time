@@ -46,7 +46,4 @@ public class MemberController {
 		service.deleteMemberByEmpNo(empNo);
 	}
 
-
-
-
 }
